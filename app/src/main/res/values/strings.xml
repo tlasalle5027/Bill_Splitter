@@ -5,4 +5,13 @@
     <string name="of_people"># of People</string>
     <string name="calculate_bill">Calculate Bill</string>
     <string name="everybody_pays">Everybody Pays:</string>
+
+    <string-array name="Tip_Pct">
+        <item>10%</item>
+        <item>12%</item>
+        <item>15%</item>
+        <item>20%</item>
+        <item>25%</item>
+        <item>30%</item>
+    </string-array>
 </resources>
