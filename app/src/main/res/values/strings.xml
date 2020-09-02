@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bill Splitter</string>
+    <string name="bill_total">Bill Total</string>
+    <string name="tip_amount">Tip Amount</string>
+    <string name="of_people"># of People</string>
+    <string name="calculate_bill">Calculate Bill</string>
+    <string name="everybody_pays">Everybody Pays:</string>
+</resources>
