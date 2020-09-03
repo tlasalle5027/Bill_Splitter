@@ -56,6 +56,7 @@
         android:layout_marginRight="32dp"
         android:layout_marginBottom="251dp"
         android:text="@string/calculate_bill"
+        android:onClick="calculateBill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -98,7 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/everybodyPaysText" />
 
     <EditText
-        android:id="@+id/editTextNumberDecimal"
+        android:id="@+id/billEditText"
         android:layout_width="147dp"
         android:layout_height="42dp"
         android:layout_marginStart="48dp"
@@ -125,7 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tipAmountText"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal" />
+        app:layout_constraintTop_toBottomOf="@+id/billEditText" />
 
     <Spinner
         android:id="@+id/peopleSpinner"

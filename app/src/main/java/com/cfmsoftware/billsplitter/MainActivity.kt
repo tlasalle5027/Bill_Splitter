@@ -3,18 +3,19 @@ package com.cfmsoftware.billsplitter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import android.widget.*
 
 import com.facebook.ads.AudienceNetworkAds
 
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 class MainActivity : AppCompatActivity() {
 
-    var check:Double = 0.0
-    var tip:Double = 0.0
-    var people:Double = 1.0
-    var total:Double = 0.0
+    var check:Double = 0.00
+    var tip:Double = 0.00
+    var people:Double = 1.00
+    var total:Double = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,5 +80,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun calculateBill(view: View?) {
+        val bill = findViewById<EditText>(R.id.billEditText) as EditText
+        val tot = findViewById<TextView>(R.id.amountView)
+
+        if(bill.text.isNotBlank()){
+            check = bill.text.toString().toDouble()
+        }
+        else{
+            check = 0.0
+        }
+
+        total = (check + (check * tip))/people
+        val split = BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN)
+        tot.text = "$" + split.toString()
     }
 }
