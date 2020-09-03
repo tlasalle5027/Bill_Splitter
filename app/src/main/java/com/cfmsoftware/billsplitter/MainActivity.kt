@@ -12,10 +12,11 @@ import java.math.RoundingMode
 
 class MainActivity : AppCompatActivity() {
 
-    var check:Double = 0.00
+    //Initialize necessary variables
+    private var check:Double = 0.00
     var tip:Double = 0.00
     var people:Double = 1.00
-    var total:Double = 0.00
+    private var total:Double = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         AudienceNetworkAds.initialize(this)
 
-        val tip_pcnt = resources.getStringArray(R.array.Tip_Pct)
-        val num_ppl = resources.getStringArray(R.array.Num_People)
+        val tipPcnt = resources.getStringArray(R.array.Tip_Pct)
+        val numPpl = resources.getStringArray(R.array.Num_People)
 
+        //Initialize the spinners with the data from the string arrays
         val tipSpinner = findViewById<Spinner>(R.id.tipSpinner)
         if(tipSpinner != null) {
             val tipAdapter =
-                ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, tip_pcnt)
+                ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, tipPcnt)
             tipSpinner.adapter = tipAdapter
             tipSpinner.setSelection(0)
 
@@ -39,6 +41,8 @@ class MainActivity : AppCompatActivity() {
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
+                    //Depending on the position of the spinner
+                    //Set the tip percentage
                     when (position) {
                         0 -> tip = .10
                         1 -> tip = .12
@@ -57,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         val pplSpinner = findViewById<Spinner>(R.id.peopleSpinner)
         if (pplSpinner != null){
-            val pplAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, num_ppl)
+            val pplAdapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, numPpl)
             pplSpinner.adapter = pplAdapter
             pplSpinner.setSelection(0)
 
@@ -82,19 +86,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun calculateBill(view: View?) {
-        val bill = findViewById<EditText>(R.id.billEditText) as EditText
+    /**
+     * Calculate the bill for each person splitting the meal,
+     * to determine how much each person owes
+     */
+    fun calculateBill() {
+        val bill = findViewById<EditText>(R.id.billEditText)
         val tot = findViewById<TextView>(R.id.amountView)
 
-        if(bill.text.isNotBlank()){
-            check = bill.text.toString().toDouble()
-        }
-        else{
-            check = 0.0
+        check = if(bill.text.isNotBlank()){
+            bill.text.toString().toDouble()
+        } else{
+            0.0
         }
 
         total = (check + (check * tip))/people
         val split = BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN)
-        tot.text = "$" + split.toString()
+        tot.text = "$$split"
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

@@ -6,6 +6,7 @@
     <string name="calculate_bill">Calculate Bill</string>
     <string name="everybody_pays">Everybody Pays:</string>
 
+    <!-- Tip Percentage Spinner -->
     <string-array name="Tip_Pct">
         <item>10%</item>
         <item>12%</item>
@@ -15,6 +16,7 @@
         <item>30%</item>
     </string-array>
 
+    <!-- People Spinner -->
     <string-array name="Num_People">
         <item>2</item>
         <item>3</item>
