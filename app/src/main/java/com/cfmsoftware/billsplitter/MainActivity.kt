@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.facebook.ads.AdSize
+import com.facebook.ads.AdView
 
 import com.facebook.ads.AudienceNetworkAds
 
@@ -18,11 +20,21 @@ class MainActivity : AppCompatActivity() {
     var people:Double = 1.00
     private var total:Double = 0.00
 
+    lateinit var adView:AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         AudienceNetworkAds.initialize(this)
+
+        adView = AdView(this, "IMG_16_9_APP_INSTALL#612023306173034_612023549506343", AdSize.BANNER_HEIGHT_50)
+        // Find the Ad Container
+        val adContainer = findViewById<LinearLayout>(R.id.banner_container)
+        // Add the ad view to your activity layout
+        adContainer.addView(adView)
+        // Request an ad
+        adView.loadAd()
 
         val tipPcnt = resources.getStringArray(R.array.Tip_Pct)
         val numPpl = resources.getStringArray(R.array.Num_People)
@@ -90,7 +102,7 @@ class MainActivity : AppCompatActivity() {
      * Calculate the bill for each person splitting the meal,
      * to determine how much each person owes
      */
-    fun calculateBill() {
+    fun calculateBill(view: View?) {
         val bill = findViewById<EditText>(R.id.billEditText)
         val tot = findViewById<TextView>(R.id.amountView)
 
@@ -106,6 +118,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        adView.destroy();
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        System.exit(0);
     }
 }
