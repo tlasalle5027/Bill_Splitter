@@ -11,6 +11,7 @@ import com.facebook.ads.AudienceNetworkAds
 
 import java.math.BigDecimal
 import java.math.RoundingMode
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     var people:Double = 1.00
     private var total:Double = 0.00
 
-    lateinit var adView:AdView
+    private lateinit var adView:AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,11 +119,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        adView.destroy();
+        adView.destroy()
         super.onDestroy()
     }
 
-    override fun onBackPressed() {
-        System.exit(0);
-    }
+    override fun onBackPressed() = exitProcess(0)
 }
